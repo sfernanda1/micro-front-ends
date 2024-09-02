@@ -41,11 +41,13 @@ Para que o contêiner host funcione corretamente, é necessário iniciar todos o
 - [x] Redirecionamento para a URL compartilhada após o login, garantindo que o usuário retorne ao link desejado.
 - [x] Implementação navbar com menu de navegação.
 - [x] Funcionalidade de logout para encerrar a sessão do usuário.
+- [x] Geração de imagem no docker.
 
 ### Tarefas Pendentes
 - [ ] Implementar testes unitários e automatizados. **(1-2 dias)**
 - [ ] Melhorar o tratamento de erros de carregamento de micro front-ends e retorno visual para o usuário.**(1-2 dias)**
 - [ ] Criar um modal de confirmação de modificações nas telas de parceiros e empresas externas.**(1/2 dia)**
 - [ ] Adicionar animação de loading para melhorar a experiência do usuário durante as requisições e transições de tela.**(1/2 dia)**
-- [ ] Criar um micro front-end de componentes para uso comum entre os micro front-ends, ou integrar uma biblioteca como o Material UI para padronização de componentes.**(1-2 dias)**
-
+- [ ] Criar um micro front-end de componentes para uso comum entre os micro front-ends, ou integrar uma biblioteca como o Material UI para padronização de componentes e estilização.**(1-2 dias)**
+- [ ] Definir variáveis para as URLs de produção e desenvolvimento. **(1/2 dia)**
+- [ ] explorar outras formas de estilização além do CSS. **(1/2 dia)**

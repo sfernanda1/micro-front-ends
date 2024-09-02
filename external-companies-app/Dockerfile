@@ -12,6 +12,6 @@ RUN npm run build -- --output-path=dist
 
 RUN npm install -g serve
 
-EXPOSE 4201
+EXPOSE 4203
 
-CMD ["serve", "-s", "dist", "-l", "4201"]
+CMD ["serve", "-s", "dist", "-l", "4203"]
