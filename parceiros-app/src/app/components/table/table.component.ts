@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Company } from '../company.model';
-import { CompanyService} from './../../services/company.service';
+import { Parceiros } from '../parceiro.model';
+import { ParceirosService } from './../../services/parceiros.service';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -10,8 +10,8 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  companies: Company[] = [];
-  displayedCompanies: Company[] = [];
+  companies: Parceiros[] = [];
+  displayedCompanies: Parceiros[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalPages: number = 0;
@@ -19,7 +19,7 @@ export class TableComponent implements OnInit {
   @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
   constructor(
-    private companiesService: CompanyService,
+    private parceirosService: ParceirosService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -33,11 +33,11 @@ export class TableComponent implements OnInit {
   }
 
   loadCompanies() {
-    this.companiesService.getCompanies().subscribe(
+    this.parceirosService.getCompanies().subscribe(
       (data) => {
-        this.companies = data.map(companies => ({
-          ...companies,
-          createdAt: new Date(companies.createdAt).toLocaleDateString()
+        this.companies = data.map(parceiros => ({
+          ...parceiros,
+          createdAt: new Date(parceiros.createdAt).toLocaleDateString()
         }));
         this.totalPages = Math.ceil(this.companies.length / this.itemsPerPage);
         this.updateDisplayedCompanies();
@@ -78,65 +78,66 @@ export class TableComponent implements OnInit {
     });
   }
 
-  openModal(companies: Company) {
-    this.modalComponent.openModal(companies);
+  openModal(parceiros: Parceiros) {
+    this.modalComponent.openModal(parceiros);
   }
 
   openModalForNew() {
-    const newCompany: Company = {
-      id:'',
-      companyName: '',
-      collaboratorsCount: 0,
-      isActive: false,
-      createdAt: '',
-      lastSubmit: '',
-      name: ''
+    const newParceiro: Parceiros = {
+      id: '',
+      name: '',
+      description: '',
+      repositoryGit: '',
+      urlDoc: '',
+      clients: [],
+      projects: [],
+      createdAt: ''
     };
-    this.modalComponent.openModal(newCompany);
+    this.modalComponent.openModal(newParceiro);
   }
 
-  saveCompanies(companies: Company) {
-    if (companies.id) {
-      this.companiesService.updateCompany(companies.id, companies).subscribe(
-        (updatedCompanies) => {
-          const index = this.companies.findIndex(c => c.id === updatedCompanies.id);
+  saveParceiros(parceiros: Parceiros) {
+    if (parceiros.id) {
+      this.parceirosService.updateParceiros(parceiros.id, parceiros).subscribe(
+        (updatedParceiros) => {
+          const index = this.companies.findIndex(c => c.id === updatedParceiros.id);
           if (index !== -1) {
-            this.companies[index] = updatedCompanies;
+            this.companies[index] = updatedParceiros;
           }
           this.updateDisplayedCompanies();
         },
         (error) => {
-          console.error('Erro ao atualizar o company', error);
+          console.error('Erro ao atualizar o parceiro', error);
         }
       );
     } else {
-      this.companiesService.addCompany(companies).subscribe(
-        (newCompanies) => {
-          this.companies.push(newCompanies);
+      this.parceirosService.addParceiros(parceiros).subscribe(
+        (newParceiros) => {
+          this.companies.push(newParceiros);
           this.totalPages = Math.ceil(this.companies.length / this.itemsPerPage);
           this.updateDisplayedCompanies();
         },
         (error) => {
-          console.error('Erro ao adicionar company', error);
+          console.error('Erro ao adicionar parceiro', error);
         }
       );
     }
   }
 
-  deleteCompanies(index: number) {
-    const company = this.displayedCompanies[index];
-    this.companiesService.deleteCompany(company.id).subscribe(
+  deleteParceiros(index: number) {
+    const parceiro = this.displayedCompanies[index];
+    this.parceirosService.deleteParceiros(parceiro.id).subscribe(
       () => {
-        const originalIndex = this.companies.findIndex(c => c.id === company.id);
+        const originalIndex = this.companies.findIndex(c => c.id === parceiro.id);
         if (originalIndex !== -1) {
           this.companies.splice(originalIndex, 1);
           this.totalPages = Math.ceil(this.companies.length / this.itemsPerPage);
           this.updateDisplayedCompanies();
         }
-        console.log('Company excluído com sucesso:', company);
+        console.log('Parceiro excluído com sucesso:', parceiro);
       },
       (error) => {
-        console.error('Erro ao excluir o company', error);
+        console.error('Erro ao excluir o parceiro', error);
       }
     );
   }

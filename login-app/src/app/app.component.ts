@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
   username: string = '';
   password: string = '';
   stayConnected: boolean = false;
+  returnUrl: string = '/dashboard';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || this.returnUrl;
+  }
 
   login() {
     if (this.username && this.password) {
@@ -21,7 +25,7 @@ export class AppComponent {
       } else {
         localStorage.setItem('user', this.username);
       }
-      this.router.navigate(['/dashboard']);
+      this.router.navigateByUrl(this.returnUrl);
     }
   }
 }

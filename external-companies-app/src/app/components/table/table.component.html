@@ -1,33 +1,40 @@
-
-<div class="container mt-4">
-  <h2>Lista de Empresas Externas</h2>
-  <table class="table table-striped">
+<div class="container-button">
+  <h1>Lista de Empresas Externas</h1>
+  <button class="btn btn-primary" (click)="openModalForNew()">Adicionar Novo</button>
+</div>
+<div class="container">
+  <table class="table table-striped custom-table">
     <thead>
       <tr>
-        <th>#</th>
+        <th>Id</th>
         <th>Nome da Empresa</th>
         <th>Número de Colaboradores</th>
         <th>Ativo</th>
         <th>Data de Criação</th>
         <th>Último Envio</th>
-        <th>Nome</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let company of companies; let i = index">
-        <td>{{ i + 1 }}</td>
+      <tr *ngFor="let company of displayedCompanies; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
         <td>{{ company.companyName }}</td>
         <td>{{ company.collaboratorsCount }}</td>
         <td>{{ company.isActive ? 'Sim' : 'Não' }}</td>
-        <td>{{ company.createdAt | date: 'shortDate' }}</td>
-        <td>{{ company.lastSubmit | date: 'shortDate' }}</td>
-        <td>{{ company.name }}</td>
+        <td>{{ company.createdAt }}</td>
+        <td>{{ company.lastSubmit }}</td>
         <td>
-          <button class="btn btn-primary btn-sm" (click)="openModal(company)">Editar</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteCompany(i)">Excluir</button>
+          <button class="btn btn-secondary" (click)="openModal(company)">Editar</button>
+          <button class="btn btn-secondary" (click)="deleteCompanies(i); $event.stopPropagation()">Deletar</button>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
+
+  <div class="pagination-controls">
+    <button class="btn btn-secondary" (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <span>{{ currentPage }} de {{ totalPages }}</span>
+    <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage === totalPages">Próxima</button>
+  </div>
+  <app-modal (save)="saveCompanies($event)">
+  </app-modal>
