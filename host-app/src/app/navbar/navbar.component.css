@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+.navbar-menu a {
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+}
+.profile-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.profile-menu {
+  position: absolute;
+  right: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.profile-menu a {
+  display: block;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+}

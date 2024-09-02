@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <div class="navbar-menu">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/partners">Partners</a>
+    <a routerLink="/externalCompanies">External Companies</a>
+  </div>
+  <div class="navbar-profile">
+    <img src="assets/profile-icon.png" alt="Profile" class="profile-icon" (click)="toggleProfileMenu()">
+    <div *ngIf="showProfileMenu" class="profile-menu">
+      <a (click)="logout()">Logout</a>
+    </div>
+  </div>
+</nav>
