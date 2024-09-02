@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Company } from '../company.model';
+import { Parceiros } from '../parceiro.model';
 
 @Component({
   selector: 'app-modal',
@@ -7,20 +7,21 @@ import { Company } from '../company.model';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  @Input() company: Company = {
+  @Input() parceiro: Parceiros = {
     id: '',
-    companyName: '',
-    collaboratorsCount: 0,
-    isActive:false,
-    createdAt: '',
-    lastSubmit: '',
     name: '',
+    description: '',
+    repositoryGit: '',
+    urlDoc: '',
+    clients: [],
+    projects: [],
+    createdAt: ''
   };
-  @Output() save = new EventEmitter<Company>();
+  @Output() save = new EventEmitter<Parceiros>();
   isOpen = false;
 
-  openModal(company: Company) {
-    this.company = { ...company };
+  openModal(parceiro: Parceiros) {
+    this.parceiro = { ...parceiro };
     this.isOpen = true;
   }
 
@@ -29,7 +30,7 @@ export class ModalComponent {
   }
 
   onSubmit() {
-    this.save.emit(this.company);
+    this.save.emit(this.parceiro);
     this.closeModal();
   }
 }

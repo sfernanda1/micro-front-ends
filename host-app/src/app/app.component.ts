@@ -12,19 +12,11 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+
         this.showNavbar = !event.url.includes('login');
       }
     });
   }
-
   ngOnInit(): void {
-    this.checkUserAuthentication();
-  }
-
-  private checkUserAuthentication(): void {
-    const user = localStorage.getItem('user'); 
-    if (!user) {
-      this.router.navigate(['/login']);
-    }
   }
 }

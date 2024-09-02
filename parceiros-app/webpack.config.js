@@ -4,7 +4,7 @@ const {
 } = require("@angular-architects/module-federation/webpack");
 
 module.exports = withModuleFederationPlugin({
-  name: "login",
+  name: "parceiros",
 
   exposes: {
     "./Module": "./src/app/app.module.ts",

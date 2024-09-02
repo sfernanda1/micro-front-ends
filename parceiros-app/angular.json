@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"login": {
+		"parceiros": {
 			"projectType": "application",
 			"schematics": {},
 			"root": "",
@@ -13,7 +13,7 @@
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/login",
+						"outputPath": "dist/parceiros",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": [
@@ -63,24 +63,24 @@
 					"builder": "ngx-build-plus:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "login:build:production",
+							"browserTarget": "parceiros:build:production",
 							"extraWebpackConfig": "webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "login:build:development"
+							"browserTarget": "parceiros:build:development"
 						}
 					},
 					"defaultConfiguration": "development",
 					"options": {
-						"port": 4201,
-						"publicHost": "http://localhost:4201",
+						"port": 4204,
+						"publicHost": "http://localhost:4204",
 						"extraWebpackConfig": "webpack.config.js"
 					}
 				},
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "login:build",
+						"browserTarget": "parceiros:build",
 						"extraWebpackConfig": "webpack.config.js"
 					}
 				},

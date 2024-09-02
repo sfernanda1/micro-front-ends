@@ -1,0 +1,43 @@
+<div class="container-button">
+  <h1>Parceiros</h1>
+  <button class="btn btn-primary" (click)="openModalForNew()">Adicionar Novo</button>
+</div>
+<table class="table table-striped custom-table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Git</th>
+      <th>URL</th>
+      <th>Clientes</th>
+      <th>Projetos</th>
+      <th>Data de Criação</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parceiro of displayedCompanies; let i = index" (click)="openModal(parceiro)">
+      <td>{{ parceiro.id }}</td>
+      <td>{{ parceiro.name }}</td>
+      <td>{{ parceiro.description }}</td>
+      <td>{{ parceiro.repositoryGit }}</td>
+      <td><a [href]="parceiro.urlDoc" target="_blank">{{ parceiro.urlDoc }}</a></td>
+      <td>{{ parceiro.clients.join(', ') }}</td>
+      <td>{{ parceiro.projects.join(', ') }}</td>
+      <td>{{ parceiro.createdAt || '-'}}</td>
+      <td>
+        <button class="btn btn-secondary"  (click)="openModal(parceiro)">Editar</button>
+        <button class="btn btn-secondary"  (click)="deleteParceiros(i); $event.stopPropagation()">Deletar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="pagination-controls">
+  <button class="btn btn-secondary" (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+  <span>{{ currentPage }} de {{ totalPages }}</span>
+  <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage === totalPages">Próxima</button>
+</div>
+<app-modal
+  (save)="saveParceiros($event)">
+</app-modal>
