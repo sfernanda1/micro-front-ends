@@ -1,27 +1,51 @@
-# MfeHost
+# Host: Micro Front-Ends Container
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
+## Descrição
+Este projeto é o contêiner host que integra todos os micro front-ends (login, dashboard, companies, e parceiros) em uma única aplicação. Ele foi desenvolvido utilizando React e TypeScript.
 
-## Development server
+## URLs dos Micro Front-Ends
+- Login: `http://localhost:4201/remoteEntry.js`
+- Dashboard: `http://localhost:4202/remoteEntry.js`
+- Companies: `http://localhost:4203/remoteEntry.js`
+- Parceiros: `http://localhost:4204/remoteEntry.js`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Instalação
+1. Clone o repositório.
+2. Navegue até a pasta do projeto: `cd host-app`.
+3. Instale as dependências: `npm install`.
 
-## Code scaffolding
+## Uso
+- Para rodar o projeto em modo de desenvolvimento: `npm start`.
+- Acesse `http://localhost:4200` no navegador.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Nota
+Para que o contêiner host funcione corretamente, é necessário iniciar todos os micro front-ends nas suas respectivas portas:
 
-## Build
+- **Login:** `npm start` na pasta `login-app` (`http://localhost:4201`)
+- **Dashboard:** `ng serve` na pasta `dashboard-app` (`http://localhost:4202`)
+- **Companies:** `ng serve` na pasta `external-companies-app` (`http://localhost:4203`)
+- **Parceiros:** `ng serve` na pasta `parceiros-app` (`http://localhost:4204`)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Comandos Importantes
+- `npm start`: Inicia o servidor de desenvolvimento.
+- `npm run build`: Compila o projeto para produção.
 
-## Running unit tests
+## Lista de Tarefas
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Tarefas Concluídas
+- [x] Configuração do host para integrar todos os micro front-ends.
+- [x] Configuração do Module Federation para comunicação entre os micro front-ends.
+- [x] Documentação inicial com instruções de instalação e uso.
+- [x] Configuração das rotas para cada micro front-end no host.
+- [x] Implementação da verificação do checkbox no login para decidir se o usuário será salvo no cookie ou no local storage.
+- [x] Redirecionamento para a URL compartilhada após o login, garantindo que o usuário retorne ao link desejado.
+- [x] Implementação navbar com menu de navegação.
+- [x] Funcionalidade de logout para encerrar a sessão do usuário.
 
-## Running end-to-end tests
+### Tarefas Pendentes
+- [ ] Implementar testes unitários e automatizados. **(1-2 dias)**
+- [ ] Melhorar o tratamento de erros de carregamento de micro front-ends e retorno visual para o usuário.**(1-2 dias)**
+- [ ] Criar um modal de confirmação de modificações nas telas de parceiros e empresas externas.**(1/2 dia)**
+- [ ] Adicionar animação de loading para melhorar a experiência do usuário durante as requisições e transições de tela.**(1/2 dia)**
+- [ ] Criar um micro front-end de componentes para uso comum entre os micro front-ends, ou integrar uma biblioteca como o Material UI para padronização de componentes.**(1-2 dias)**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
